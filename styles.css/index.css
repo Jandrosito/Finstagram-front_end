@@ -1,10 +1,18 @@
+
+html {
+    min-height: 100%;
+    margin: 0;
+    background-color: black;
+ }
+
 body {
+    min-height: 100%;
+    margin: 0;
     background-color: black;
 }
 
 #main {
-    height: 100vh;
-    width: 100vw;
+    margin: 0px;
     background-color: black;
 }
 
@@ -61,7 +69,9 @@ body {
     font-family: 'Lobster', cursive;
     color: white;
     text-align: center;
-    font-size: 60px;
+    font-size: 80px;
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
 }
 
 .user-display-name {
@@ -85,4 +95,307 @@ body {
 
 .comment-li {
     color: white;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    text-align: left;
+    font-size: 20px;
+} 
+
+h1.login-banner {
+    position: relative;
+    /* font-family: 'Roboto', sans-serif; */
+    font-family: 'Lobster', cursive;
+    color: white;
+    font-size: 63px;
+    margin-top: 5%;
+    left: 40%;
+}
+
+#login-content-div {
+    /* margin-top: 5%;
+    position: relative;
+    margin-left: 42%;
+    border: 2px solid white;
+    margin-right: 42%;
+    padding: 5px; */
+}
+
+#login-form-div {
+    background-color: black;
+    color: black;
+}
+
+#signup-link {
+    text-align: center;
+}
+
+#user-delete-btn {
+    border-radius: 12px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+#profile-edit-btn{
+    border-radius: 12px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+#user-delete-btn:hover {
+    background-color: red; 
+    color: white;
+    
+  }
+
+#profile-edit-btn:hover {
+    background-color: black; 
+    color: white;
+  }
+
+.like-btn{
+    border-radius: 12px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+.like-btn:hover{
+    background-color: green; 
+    color: white;
+}
+
+.comment-delete-btn{
+    font-size: 9px;
+    border: none;
+    color: white;
+    background-color: transparent;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+.comment-delete-btn:hover{
+    position: relative;
+    background-color:red; 
+    color: white;
+}
+
+.comment-li {
+    list-style: none;
+    font-size: 21px;
+}
+
+.like-counter {
+    color: white;
+    font-size: 16px;
+}
+
+.likes {
+    font-size: 10px;
+}
+
+#like-div {
+
+}
+
+.grid-image{
+    height: 500px;
+    width: 600px;
+}
+
+.display-pic {
+    height: 300px;
+    width: 300px;
+}
+
+#picture-submit-btn {
+    border-radius: 12px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+#picture-submit-btn:hover {
+    background-color: green; 
+    color: white;
+}
+
+.photo-delete-btn {
+    border-radius: 12px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+.photo-delete-btn:hover {
+    position: relative;
+    background-color:red; 
+    color: white;
+}
+
+.comment-submit {
+    border-radius: 12px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+.comment-submit:hover {
+    background-color: green; 
+    color: white;
+}
+
+#profile-edit-submit {
+    border-radius: 12px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+#profile-edit-submit:hover {
+    background-color: green; 
+    color: white;
+}
+
+#signup-submit-btn {
+    border-radius: 12px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+#signup-submit-btn:hover {
+    background-color: green; 
+    color: white;
+}
+
+@import url('https://rsms.me/inter/inter-ui.css');
+::selection {
+  background: #2D2F36;
+}
+::-webkit-selection {
+  background: #2D2F36;
+}
+::-moz-selection {
+  background: #2D2F36;
+}
+/* body {
+  background: white;
+  font-family: 'Inter UI', sans-serif;
+  margin: 0;
+  padding: 20px;
+} */
+.page {
+  background: black;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 40px);
+  position: relative;
+  place-content: center;
+  width: calc(100% - 40px);
+}
+/* @media (max-width: 767px) {
+  .page {
+    height: auto;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+  }
+} */
+.container {
+  display: flex;
+  height: 320px;
+  margin: 0 auto;
+  width: 640px;
+}
+/* @media (max-width: 767px) {
+  .container {
+    flex-direction: column;
+    height: 630px;
+    width: 320px;
+  }
+} */
+.left {
+  background: white;
+  height: calc(100% - 40px);
+  top: 20px;
+  position: relative;
+  width: 50%;
+}
+/* @media (max-width: 767px) {
+  .left {
+    height: 100%;
+    left: 20px;
+    width: calc(100% - 40px);
+    max-height: 270px;
+  }
+} */
+.login {
+  font-size: 50px;
+  font-weight: 900;
+  margin: 50px 40px 40px;
+}
+.eula {
+  color: #999;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 40px;
+}
+.right {
+  background: #474A59;
+  box-shadow: 0px 0px 40px 16px rgba(0,0,0,0.22);
+  color: #F1F1F2;
+  position: relative;
+  width: 50%;
+}
+/* @media (max-width: 767px) {
+  .right {
+    flex-shrink: 0;
+      height: 100%;
+    width: 100%; 
+    max-height: 350px; 
+  } 
+} */
+svg {
+  position: absolute;
+  width: 320px;
+}
+path {
+  fill: none;
+  stroke: url(#linearGradient);;
+  stroke-width: 4;
+  stroke-dasharray: 240 1386;
+}
+.form {
+  margin: 40px;
+  position: absolute;
+}
+label {
+  color:white;
+  display: block;
+  font-size: 14px;
+  height: 16px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+.login-input {
+  background: transparent;
+  border: 0;
+  color: white;
+  font-size: 20px;
+  height: 30px;
+  line-height: 30px;
+  outline: none !important;
+  width: 100%;
+}
+.login-input::-moz-focus-inner { 
+  border: 0; 
+}
+.login-btn {
+  border-radius: 12px;
+  color: #707075;
+  margin-top: 40px;
+  transition: color 300ms;
+}
+.login-btn:focus {
+ border-radius: 15px;
+  color: black;
+}
+.login-btn:active {
+  color: #d0d0d2;
 }

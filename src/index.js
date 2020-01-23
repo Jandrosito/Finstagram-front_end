@@ -21,31 +21,69 @@ document.addEventListener("DOMContentLoaded", function() {
         loginDiv.innerHTML = ""
         userProfile.classList.add("hidden")
         loginDiv.classList.remove("hidden")
-        let loginInput = document.createElement("input")
-        let loginBtn = document.createElement("button")
+        let loginFormDiv = document.createElement("div")
         let loginBanner = document.createElement("h1")
-        let loginP = document.createElement("p")
-        let loginOrP = document.createElement("p")
         let signupLinkP = document.createElement("p")
-        loginOrP.innerText = "Or"
-        loginOrP.className = "login-or-p"
-        signupLinkP.innerText = "Sign Up"
-        signupLinkP.className = "signup-link-p"
-        signupLinkP.id = "signup-link"
-        loginP.innerText = "Would you like to"
-        loginP.className = "login-p"
-        loginBanner.innerText = "Welcome!"
-        loginBanner.className = "login-banner"
-        loginInput.placeholder = "Username: "
-        loginInput.className = "login-input"
-        loginInput.id = "login-input"
-        loginBtn.innerText = "Log In"
-        loginBtn.className = "login-btn"
+
+        loginFormDiv.id = "login-form-div"
+        loginFormDiv.innerHTML = `
+<div class="page">
+<div class="container">
+  <div class="left">
+    <div class="login">Login</div>
+    <div class="eula">By logging in you agree to the ridiculously long terms that you didn't bother to read</div>
+  </div>
+  <div class="right">
+    <svg viewBox="0 0 320 300">
+      <defs>
+        <linearGradient
+                        inkscape:collect="always"
+                        id="linearGradient"
+                        x1="13"
+                        y1="193.49992"
+                        x2="307"
+                        y2="193.49992"
+                        gradientUnits="userSpaceOnUse">
+          <stop
+                style="stop-color:#ff00ff;"
+                offset="0"
+                id="stop876" />
+          <stop
+                style="stop-color:#ff0000;"
+                offset="1"
+                id="stop878" />
+        </linearGradient>
+      </defs>
+      <path d="m 40,120.00016 239.99984,-3.2e-4 c 0,0 24.99263,0.79932 25.00016,35.00016 0.008,34.20084 -25.00016,35 -25.00016,35 h -239.99984 c 0,-0.0205 -25,4.01348 -25,38.5 0,34.48652 25,38.5 25,38.5 h 215 c 0,0 20,-0.99604 20,-25 0,-24.00396 -20,-25 -20,-25 h -190 c 0,0 -20,1.71033 -20,25 0,24.00396 20,25 20,25 h 168.57143" />
+    </svg>
+    <div class="form">
+      <label for="username">Username</label>
+      <input type="username" id="login-Input" class="login-input">
+      <input type="submit" class="login-btn" value="Submit">
+    </div>
+  </div>
+</div>
+</div>
+      `
+        // loginContentDiv.id = "login-content-div"
+        // moreP.innerText = "Login: "
+        // moreP.id = "more-p"
+        // loginOrP.innerText = "Or"
+        // loginOrP.className = "login-or-p"
+         signupLinkP.innerText = "Sign Up"
+         signupLinkP.className = "signup-link-p"
+         signupLinkP.id = "signup-link"
+         loginBanner.innerText = "Welcome!"
+         loginBanner.className = "login-banner"
+        // loginP.innerText = "Would you like to"
+        // loginP.className = "login-p"
+        // loginInput.placeholder = "Username: "
+        // loginInput.className = "login-input"
+        // loginInput.id = "login-input"
+        // loginBtn.innerText = "Log In"
+        // loginBtn.className = "login-btn"
         loginDiv.appendChild(loginBanner)
-        loginDiv.appendChild(loginP)
-        loginDiv.appendChild(loginInput)
-        loginDiv.appendChild(loginBtn)
-        loginDiv.appendChild(loginOrP)
+        loginDiv.appendChild(loginFormDiv)
         loginDiv.appendChild(signupLinkP)
     }
 
@@ -78,6 +116,37 @@ document.addEventListener("DOMContentLoaded", function() {
         signupForm.appendChild(signupAboutMeInput)
         signupForm.appendChild(signupSubmitBtn)
         signupDiv.appendChild(signupForm)
+    }
+
+    function profileEditCreate(user_id) {
+        console.log(user_id)
+        let aboutMeDiv = document.getElementById("about-me-div")
+        let profileEditForm = document.createElement("form")
+        let nameEditField = document.createElement("input")
+        let passwordEditField = document.createElement("input")
+        let photoEditField = document.createElement("input")
+        let aboutMeEditField = document.createElement("input")
+        let profileEditSubmit = document.createElement("input")
+
+        nameEditField.placeholder = "Name:"
+        nameEditField.id = "name-edit-field"
+        passwordEditField.placeholder = "Password:"
+        passwordEditField.id = "password-edit-field"
+        photoEditField.placeholder = "Photo Url:"
+        photoEditField.id = "photo-edit-field"
+        aboutMeEditField.placeholder = "Description:"
+        aboutMeEditField.id = "about-me-edit-field"
+        profileEditSubmit.type = "submit"
+        profileEditSubmit.value = "Submit"
+        profileEditSubmit.id = "profile-edit-submit"
+        profileEditSubmit.dataset.userid = user_id
+        
+        profileEditForm.appendChild(nameEditField)
+        profileEditForm.appendChild(passwordEditField)
+        profileEditForm.appendChild(photoEditField)
+        profileEditForm.appendChild(aboutMeEditField)
+        profileEditForm.appendChild(profileEditSubmit)
+        aboutMeDiv.prepend(profileEditForm)
     }
 
     function getUsers() {
@@ -135,7 +204,11 @@ document.addEventListener("DOMContentLoaded", function() {
         let captionField = document.createElement("input")
         let pictureSubmitBtn = document.createElement("input")
         let userDeleteBtn = document.createElement("button")
+        let profileEditBtn = document.createElement("button")
 
+        profileEditBtn.innerText = "Edit Profile"
+        profileEditBtn.dataset.userid = userInfo.id
+        profileEditBtn.id = "profile-edit-btn"
         userDeleteBtn.id = "user-delete-btn"
         userDeleteBtn.dataset.userid = userInfo.id
         userDeleteBtn.innerText = "Delete Profile"
@@ -144,10 +217,13 @@ document.addEventListener("DOMContentLoaded", function() {
         pictureForm.appendChild(captionField)
         pictureForm.appendChild(pictureSubmitBtn)
         urlField.id = "url-field"
+        urlField.placeholder = "Image url:"
         captionField.id = "caption-field"
+        captionField.placeholder = "Caption:"
         pictureSubmitBtn.id = "picture-submit-btn"
         pictureSubmitBtn.dataset.userid = userInfo.id
         pictureSubmitBtn.type = "submit"
+        pictureSubmitBtn.value = "Submit Photo"
         commentUl.className = "comments-list"
         imgBody.className = "img-body"
         nameHead.className = "user-display-name"
@@ -158,6 +234,7 @@ document.addEventListener("DOMContentLoaded", function() {
         displayPicImg.src = userInfo.display_pic
         displayPicDiv.appendChild(displayPicImg)
         aboutMeP.innerText = userInfo.about_me
+        aboutMeDiv.id = "about-me-div"
         aboutMeP.className = "about-me-p"
         aboutMeDiv.appendChild(aboutMeP)
         
@@ -172,6 +249,7 @@ document.addEventListener("DOMContentLoaded", function() {
             let descriptionField = document.createElement("input")
             let commentSubmitBtn = document.createElement("input")
             let photoDeleteBtn = document.createElement("button")
+            let likeDiv = document.createElement("div")
             
             if (photo.caption) {
                 let caption = document.createElement("p") 
@@ -179,11 +257,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 tileContent.appendChild(caption)
             }
 
+            gridImage.className = "grid-image"
             photoDeleteBtn.innerText = "Delete Photo"
             photoDeleteBtn.dataset.photoid = photo.id
             photoDeleteBtn.className = "photo-delete-btn"
             descriptionField.attributes = ("type", "text")
-            descriptionField.name = ("description")
+            descriptionField.name = "description"
             descriptionField.id = `comment-description-${photo.id}`
             descriptionField.dataset.photoid = photo.id
             descriptionField.dataset.userid = userInfo.id
@@ -198,13 +277,14 @@ document.addEventListener("DOMContentLoaded", function() {
             commentForm.appendChild(commentSubmitBtn)
             commentUl.id = `comment-ul-${photo.id}`
             commentUl.dataset.id = photo.id
-            commentUl.className = ("comment-ul")
+            commentUl.className = "comment-ul"
             likeCounter.dataset.id = photo.id
-            likeCounter.className = ("like-counter")
+            likeCounter.className = "like-counter"
             likeSpan.className = "likes"
             likeBtn.innerText = "Like"
             likeBtn.className = "like-btn"
             likeBtn.dataset.userid = userInfo.id
+            likeDiv.id = "like-div"
 
             if (photo.likes) {
                 let like = photo.likes.length
@@ -223,7 +303,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     let commentLi = document.createElement("li")
                     let commentDeleteBtn = document.createElement("button")
                     commentDeleteBtn.className = "comment-delete-btn"
-                    commentDeleteBtn.innerText = "X"
+                    commentDeleteBtn.innerText = "𝙓"
                     commentDeleteBtn.dataset.photoid = photo.id
                     commentDeleteBtn.dataset.commentid = comment.id
                     commentLi.className = "comment-li"
@@ -241,19 +321,21 @@ document.addEventListener("DOMContentLoaded", function() {
             likeBtn.dataset.userid = userInfo.id
             likeBtn.dataset.id = photo.id
             likeSpan.dataset.id = photo.id
-            tileContent.appendChild(likeSpan)
-            tileContent.appendChild(likeBtn)
+            likeDiv.appendChild(likeBtn)
+            likeDiv.appendChild(likeCounter)
+            tileContent.appendChild(likeDiv)
+            tileContent.appendChild(photoDeleteBtn)
             tileContent.appendChild(commentUl)
             tileContent.appendChild(commentForm)
-            tileContent.appendChild(photoDeleteBtn)
             imgBody.appendChild(tileContent)
         })
         userProfile.appendChild(nameHead)
         userProfile.appendChild(displayPicDiv)
+        userProfile.appendChild(userDeleteBtn)
+        userProfile.appendChild(profileEditBtn)
         userProfile.appendChild(aboutMeDiv)
         pictureFormDiv.appendChild(pictureForm)
         imgBody.appendChild(pictureFormDiv)
-        imgBody.appendChild(userDeleteBtn)
         userProfile.appendChild(imgBody)
     }
 
@@ -261,12 +343,13 @@ document.addEventListener("DOMContentLoaded", function() {
         userProfile.classList.add("hidden")
         usersIndexDiv.classList.remove("hidden")
         loginDiv.classList.add("hidden")
+        signupDiv.classList.add("hidden")
         getUsers()
     })
 
     loginDiv.addEventListener("click", function(e) {
         if (e.target.className === "login-btn") {
-            let loginInput = document.getElementById("login-input")
+            let loginInput = document.getElementById("login-Input")
             fetch("http://localhost:3000/users")
             .then(resp => resp.json())
             .then(users => {
@@ -285,9 +368,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     signupDiv.addEventListener("submit", function(e) {
         e.preventDefault()
-        console.log(e.target.lastChild.id)
         if (e.target.lastChild.id === "signup-submit-btn") {
-            console.log("pass")
             let nameData = document.getElementById("signup-name-input")
             let passwordData = document.getElementById("signup-password-input")
             let userPicData = document.getElementById("signup-display-pic-input")
@@ -307,7 +388,6 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(resp => resp.json())
             .then(newUser => {
-                console.log(newUser)
                 renderUser(newUser.id)
             })
         }
@@ -381,6 +461,38 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             loginCreate()
         }
+        if (e.target.id === "profile-edit-btn") {
+            let editBtn = document.getElementById("profile-edit-btn")
+            editBtn.classList.add("hidden")
+            profileEditCreate(e.target.dataset.userid)
+        }
+        if (e.target.id === "profile-edit-submit") {
+            let usernameData = document.getElementById("name-edit-field")
+            let passwordData = document.getElementById("password-edit-field")
+            let photoData = document.getElementById("photo-edit-field")
+            let aboutMeData = document.getElementById("about-me-edit-field")
+            console.log(usernameData.value)
+            console.log(e.target.dataset.userid)
+            fetch(`http://localhost:3000/users/${e.target.dataset.userid}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json"
+                },
+                body: JSON.stringify({
+                    username: usernameData.value,
+                    password: passwordData.value,
+                    display_pic: photoData.value,
+                    about_me: aboutMeData.value,
+                })
+            })
+            .then(resp => resp.json())
+            .then(editedUser => {
+                console.log(editedUser)
+                console.log(editedUser.id)
+                renderUser(editedUser.id)
+            })
+        }
     })
 
     userProfile.addEventListener("click", function(e) {
@@ -403,4 +515,49 @@ document.addEventListener("DOMContentLoaded", function() {
             })
         }
     })
+
+
+
+
+     var current = null;
+     loginDiv.addEventListener('focus', function(e) {
+         if (e.target.id === "login-input") {
+      if (current) current.pause();
+      current = anime({
+        targets: 'path',
+        strokeDashoffset: {
+          value: 0,
+          duration: 700,
+          easing: 'easeOutQuart'
+        },
+        strokeDasharray: {
+          value: '240 1386',
+          duration: 700,
+          easing: 'easeOutQuart'
+        }
+      });
+    }
+    });
+    loginDiv.addEventListener('focus', function(e) {
+        if (e.target.className === "login-btn") {
+      if (current) current.pause();
+      current = anime({
+        targets: 'path',
+        strokeDashoffset: {
+          value: -730,
+          duration: 700,
+          easing: 'easeOutQuart'
+        },
+        strokeDasharray: {
+          value: '530 1386',
+          duration: 700,
+          easing: 'easeOutQuart'
+        }
+      });
+    }
+    });
+
+
+
+
 })
