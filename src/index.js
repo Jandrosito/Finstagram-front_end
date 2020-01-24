@@ -1,17 +1,22 @@
 document.addEventListener("DOMContentLoaded", function() {
     const baseURL = "http://localhost:3000/"
     const usersURL = "http://localhost:3000/users"
+
     let mainDiv = document.getElementById("main")
     let navBar = document.getElementById("the-nav-bar")
-    navBar.classList.add("hidden")
     let loginDiv = document.createElement("div")
     let signupDiv = document.createElement("div")
+    let profileViewBtn = document.getElementById("profileNavBtn")
     let usersListBtn = document.getElementById("usersNavBtn")
+    let logoutNavBtn = document.getElementById("logoutNavBtn")
     let usersIndexDiv = document.getElementById("users-index")
     let userProfile = document.createElement("div")
+    let currentUser = ""
+
     usersIndexDiv.classList.add("hidden")
     userProfile.classList.add("hidden")
     signupDiv.classList.add("hidden")
+    navBar.classList.add("hidden")
     mainDiv.appendChild(userProfile)
     mainDiv.appendChild(loginDiv)
     mainDiv.appendChild(signupDiv)
@@ -21,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function() {
         loginDiv.innerHTML = ""
         userProfile.classList.add("hidden")
         loginDiv.classList.remove("hidden")
+
         let loginFormDiv = document.createElement("div")
         let loginBanner = document.createElement("h1")
         let signupLinkP = document.createElement("p")
@@ -59,29 +65,17 @@ document.addEventListener("DOMContentLoaded", function() {
     <div class="form">
       <label for="username">Username</label>
       <input type="username" id="login-Input" class="login-input">
-      <input type="submit" class="login-btn" value="Submit">
+      <input type="submit" class="login-btn" value="Login">
     </div>
   </div>
 </div>
 </div>
       `
-        // loginContentDiv.id = "login-content-div"
-        // moreP.innerText = "Login: "
-        // moreP.id = "more-p"
-        // loginOrP.innerText = "Or"
-        // loginOrP.className = "login-or-p"
          signupLinkP.innerText = "Sign Up"
          signupLinkP.className = "signup-link-p"
          signupLinkP.id = "signup-link"
          loginBanner.innerText = "Welcome!"
          loginBanner.className = "login-banner"
-        // loginP.innerText = "Would you like to"
-        // loginP.className = "login-p"
-        // loginInput.placeholder = "Username: "
-        // loginInput.className = "login-input"
-        // loginInput.id = "login-input"
-        // loginBtn.innerText = "Log In"
-        // loginBtn.className = "login-btn"
         loginDiv.appendChild(loginBanner)
         loginDiv.appendChild(loginFormDiv)
         loginDiv.appendChild(signupLinkP)
@@ -154,18 +148,21 @@ document.addEventListener("DOMContentLoaded", function() {
         .then(resp => resp.json())
         .then(users => {
             usersIndexDiv.innerHTML = ""
-         users.forEach(user => renderUsers(user))
+            users.forEach(user => renderUsers(user))
         })
     }
-
+    
     function renderUsers(user) {
         let userDiv = document.createElement("div")
         let userUl = document.createElement("ul")
         let userLi = document.createElement("li")
+        userDiv.id = "user-div"
+        userUl.id = "user-ul"
+        userLi.className = "user-li"
         userDiv.className = "user-div"
         userLi.dataset.id = user.id
         userUl.className = "user-ul"
-        userLi.clasName = "user-li"
+        userLi.className = "user-li"
         userLi.innerText = user.username
         userUl.appendChild(userLi)
         userDiv.appendChild(userUl)  
@@ -238,106 +235,132 @@ document.addEventListener("DOMContentLoaded", function() {
         aboutMeP.className = "about-me-p"
         aboutMeDiv.appendChild(aboutMeP)
         
-        userInfo.photos.forEach(function(photo) {
-            let tileContent = document.createElement("div")
-            let gridImage = document.createElement("img")
-            let likeBtn = document.createElement("button")
-            let likeSpan = document.createElement("span")
-            let likeCounter = document.createElement("span")
-            let commentUl = document.createElement("ul")
-            let commentForm = document.createElement("form")
-            let descriptionField = document.createElement("input")
-            let commentSubmitBtn = document.createElement("input")
-            let photoDeleteBtn = document.createElement("button")
-            let likeDiv = document.createElement("div")
+         if (userInfo.comments.length < 1) {
+            let noPhotoText = document.createElement("h3")
+            if (currentUser.id === userInfo.id) {
+                noPhotoText.innerText = "You have not posted any photos yet"
+            } else {
+                noPhotoText.innerText = "This user has not posted any photos yet"
+            }
+                imgBody.appendChild(noPhotoText)
+        } else if (userInfo.photos) {
+            userInfo.photos.forEach(function(photo) {
+                let tileContent = document.createElement("div")
+                let gridImage = document.createElement("img")
+                let likeBtn = document.createElement("button")
+                let likeSpan = document.createElement("span")
+                let likeCounter = document.createElement("span")
+                let commentUl = document.createElement("ul")
+                let commentForm = document.createElement("form")
+                let descriptionField = document.createElement("input")
+                let commentSubmitBtn = document.createElement("input")
+                let photoDeleteBtn = document.createElement("button")
+                let likeDiv = document.createElement("div")
+                
+                if (photo.caption) {
+                    let caption = document.createElement("p") 
+                    caption.innerText = photo.caption 
+                    tileContent.appendChild(caption)
+                }
+
+                gridImage.className = "grid-image"
+                photoDeleteBtn.innerText = "Delete Photo"
+                photoDeleteBtn.dataset.photoid = photo.id
+                photoDeleteBtn.className = "photo-delete-btn"
+                descriptionField.attributes = ("type", "text")
+                descriptionField.name = "description"
+                descriptionField.id = `comment-description-${photo.id}`
+                descriptionField.dataset.photoid = photo.id
+                descriptionField.dataset.userid = userInfo.id
+                descriptionField.className = "description-field"
+                commentSubmitBtn.attributes = ("value", "Submit")
+                commentSubmitBtn.type = "submit"
+                commentSubmitBtn.className = "comment-submit"
+                commentSubmitBtn.value = "Add Comment"
+                commentSubmitBtn.dataset.photoid = photo.id
+                commentSubmitBtn.dataset.userid = userInfo.id
+                commentForm.appendChild(descriptionField)
+                commentForm.appendChild(commentSubmitBtn)
+                commentUl.id = `comment-ul-${photo.id}`
+                commentUl.dataset.id = photo.id
+                commentUl.className = "comment-ul"
+                likeCounter.dataset.id = photo.id
+                likeCounter.className = "like-counter"
+                likeSpan.className = "likes"
+                likeBtn.innerText = "Like"
+                likeBtn.className = "like-btn"
+                likeBtn.dataset.userid = userInfo.id
+                likeDiv.id = "like-div"
+
+                if (photo.likes) {
+                    let like = photo.likes.length
+                    likeCounter.innerText = like
+                    likeSpan.innerText = "Likes: "
+                    likeSpan.appendChild(likeCounter)
+                } else if (!photo.likes) {
+                    like = 0
+                    likeCounter.innerText = like
+                    likeSpan.innerText = "Likes: "
+                    likesSpan.appendChild(likeCounter)
+                }
+
+                if (photo.comments && photo.comments.length) {
+                    photo.comments.forEach(function(comment) {
+                        let commentLi = document.createElement("li")
+                        let commentDeleteBtn = document.createElement("button")
+                        commentDeleteBtn.className = "comment-delete-btn"
+                        commentDeleteBtn.innerText = "𝙓"
+                        commentDeleteBtn.dataset.photoid = photo.id
+                        commentDeleteBtn.dataset.commentid = comment.id
+                        commentLi.className = "comment-li"
+                        commentLi.dataset.id = comment.id
+                        commentLi.innerText = comment.description
+                        if (currentUser.id === comment.user_id) {
+                        commentLi.appendChild(commentDeleteBtn)
+                        }
+                        commentUl.appendChild(commentLi)
+                    })
+                }
             
-            if (photo.caption) {
-                let caption = document.createElement("p") 
-                caption.innerText = photo.caption 
-                tileContent.appendChild(caption)
-            }
 
-            gridImage.className = "grid-image"
-            photoDeleteBtn.innerText = "Delete Photo"
-            photoDeleteBtn.dataset.photoid = photo.id
-            photoDeleteBtn.className = "photo-delete-btn"
-            descriptionField.attributes = ("type", "text")
-            descriptionField.name = "description"
-            descriptionField.id = `comment-description-${photo.id}`
-            descriptionField.dataset.photoid = photo.id
-            descriptionField.dataset.userid = userInfo.id
-            descriptionField.className = "description-field"
-            commentSubmitBtn.attributes = ("value", "Submit")
-            commentSubmitBtn.type = "submit"
-            commentSubmitBtn.className = "comment-submit"
-            commentSubmitBtn.value = "Add Comment"
-            commentSubmitBtn.dataset.photoid = photo.id
-            commentSubmitBtn.dataset.userid = userInfo.id
-            commentForm.appendChild(descriptionField)
-            commentForm.appendChild(commentSubmitBtn)
-            commentUl.id = `comment-ul-${photo.id}`
-            commentUl.dataset.id = photo.id
-            commentUl.className = "comment-ul"
-            likeCounter.dataset.id = photo.id
-            likeCounter.className = "like-counter"
-            likeSpan.className = "likes"
-            likeBtn.innerText = "Like"
-            likeBtn.className = "like-btn"
-            likeBtn.dataset.userid = userInfo.id
-            likeDiv.id = "like-div"
-
-            if (photo.likes) {
-                let like = photo.likes.length
-                likeCounter.innerText = like
-                likeSpan.innerText = "Likes: "
-                likeSpan.appendChild(likeCounter)
-            } else if (!photo.likes) {
-                like = 0
-                likeCounter.innerText = like
-                likeSpan.innerText = "Likes: "
-                likesSpan.appendChild(likeCounter)
-            }
-
-            if (photo.comments) {
-                photo.comments.forEach(function(comment) {
-                    let commentLi = document.createElement("li")
-                    let commentDeleteBtn = document.createElement("button")
-                    commentDeleteBtn.className = "comment-delete-btn"
-                    commentDeleteBtn.innerText = "𝙓"
-                    commentDeleteBtn.dataset.photoid = photo.id
-                    commentDeleteBtn.dataset.commentid = comment.id
-                    commentLi.className = "comment-li"
-                    commentLi.dataset.id = comment.id
-                    commentLi.innerText = comment.description
-                    commentLi.appendChild(commentDeleteBtn)
-                    commentUl.appendChild(commentLi)
-                })
-            }
-
-            gridImage.src = photo.photo_url
-            tileContent.appendChild(gridImage)
-            tileContent.className = "tile-content"
-            tileContent.dataset.id = photo.id
-            likeBtn.dataset.userid = userInfo.id
-            likeBtn.dataset.id = photo.id
-            likeSpan.dataset.id = photo.id
-            likeDiv.appendChild(likeBtn)
-            likeDiv.appendChild(likeCounter)
-            tileContent.appendChild(likeDiv)
-            tileContent.appendChild(photoDeleteBtn)
-            tileContent.appendChild(commentUl)
-            tileContent.appendChild(commentForm)
-            imgBody.appendChild(tileContent)
-        })
+                gridImage.src = photo.photo_url
+                tileContent.appendChild(gridImage)
+                tileContent.className = "tile-content"
+                tileContent.dataset.id = photo.id
+                likeBtn.dataset.userid = userInfo.id
+                likeBtn.dataset.id = photo.id
+                likeSpan.dataset.id = photo.id
+                likeDiv.appendChild(likeBtn)
+                likeDiv.appendChild(likeCounter)
+                tileContent.appendChild(likeDiv)
+                tileContent.appendChild(photoDeleteBtn)
+                tileContent.appendChild(commentUl)
+                tileContent.appendChild(commentForm)
+                imgBody.appendChild(tileContent)
+            })
+        }
         userProfile.appendChild(nameHead)
         userProfile.appendChild(displayPicDiv)
+        if (currentUser.id === userInfo.id) {
         userProfile.appendChild(userDeleteBtn)
         userProfile.appendChild(profileEditBtn)
+        }
         userProfile.appendChild(aboutMeDiv)
+
+        if (currentUser.id === userInfo.id) {
         pictureFormDiv.appendChild(pictureForm)
+        }
         imgBody.appendChild(pictureFormDiv)
         userProfile.appendChild(imgBody)
     }
+    
+    profileViewBtn.addEventListener("click", function(e) {
+        userProfile.classList.remove("hidden")
+        usersIndexDiv.classList.add("hidden")
+        loginDiv.classList.add("hidden")
+        signupDiv.classList.add("hidden")
+        renderUser(currentUser.id)
+    })
 
     usersListBtn.addEventListener("click", function(e) {
         userProfile.classList.add("hidden")
@@ -345,6 +368,14 @@ document.addEventListener("DOMContentLoaded", function() {
         loginDiv.classList.add("hidden")
         signupDiv.classList.add("hidden")
         getUsers()
+    })
+
+    logoutNavBtn.addEventListener("click", function(e) {
+        userProfile.classList.add("hidden")
+        usersIndexDiv.classList.add("hidden")
+        loginDiv.classList.remove("hidden")
+        signupDiv.classList.add("hidden")
+        navBar.classList.add("hidden")
     })
 
     loginDiv.addEventListener("click", function(e) {
@@ -356,6 +387,7 @@ document.addEventListener("DOMContentLoaded", function() {
                
                 users.forEach(function(user) {
                     if (user.username === loginInput.value) {
+                        currentUser = user
                         renderUser(user.id)
                     }
                 })
@@ -367,6 +399,7 @@ document.addEventListener("DOMContentLoaded", function() {
     })
 
     signupDiv.addEventListener("submit", function(e) {
+        signupDiv.classList.add("hidden")
         e.preventDefault()
         if (e.target.lastChild.id === "signup-submit-btn") {
             let nameData = document.getElementById("signup-name-input")
@@ -388,7 +421,9 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(resp => resp.json())
             .then(newUser => {
+                currentUser = newUser
                 renderUser(newUser.id)
+                e.target.reset();
             })
         }
     })
@@ -404,7 +439,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     Accept: "application/json"
                 },
                 body: JSON.stringify({
-                    user_id:  e.target.lastChild.dataset.userid,
+                    user_id:  currentUser.id,
                     description: descriptionInput.value,
                     photo_id: e.target.lastChild.dataset.photoid
                 })
@@ -416,7 +451,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 commentLi.className = "comment-li"
                 commentLi.innerText = aComment.description
                 commentUl.appendChild(commentLi)
-                renderUser(aComment.user_id)
+                renderUser(e.target.lastChild.dataset.userid)
             }) 
             e.target.reset();
         }  
