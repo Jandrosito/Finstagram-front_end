@@ -86,7 +86,6 @@ body {
 
 .user-div {
     text-align: center;
-    font-size: 30px;
 }
 
 .likes {
@@ -106,21 +105,11 @@ p {
 
 h1.login-banner {
     position: relative;
-    /* font-family: 'Roboto', sans-serif; */
     font-family: 'Lobster', cursive;
     color: white;
     font-size: 63px;
     margin-top: 5%;
-    left: 40%;
-}
-
-#login-content-div {
-    /* margin-top: 5%;
-    position: relative;
-    margin-left: 42%;
-    border: 2px solid white;
-    margin-right: 42%;
-    padding: 5px; */
+    left: 41%;
 }
 
 #login-form-div {
@@ -147,12 +136,14 @@ h1.login-banner {
 #user-delete-btn:hover {
     background-color: red; 
     color: white;
+    border: 1px solid black;
     
   }
 
 #profile-edit-btn:hover {
     background-color: black; 
     color: white;
+    border: 1px solid black;
   }
 
 .like-btn{
@@ -164,6 +155,7 @@ h1.login-banner {
 .like-btn:hover{
     background-color: green; 
     color: white;
+    border: 1px solid black;
 }
 
 .comment-delete-btn{
@@ -176,9 +168,11 @@ h1.login-banner {
 }
 
 .comment-delete-btn:hover{
+    border-radius: 8px;
     position: relative;
     background-color:red; 
     color: white;
+    border: 1px solid black;
 }
 
 .comment-li {
@@ -218,6 +212,7 @@ h1.login-banner {
 #picture-submit-btn:hover {
     background-color: green; 
     color: white;
+    border: 1px solid black;
 }
 
 .photo-delete-btn {
@@ -230,6 +225,7 @@ h1.login-banner {
     position: relative;
     background-color:red; 
     color: white;
+    border: 1px solid black;
 }
 
 .comment-submit {
@@ -241,6 +237,7 @@ h1.login-banner {
 .comment-submit:hover {
     background-color: green; 
     color: white;
+    border: 1px solid black;
 }
 
 #profile-edit-submit {
@@ -252,6 +249,7 @@ h1.login-banner {
 #profile-edit-submit:hover {
     background-color: green; 
     color: white;
+    border: 1px solid black;
 }
 
 #signup-submit-btn {
@@ -263,6 +261,27 @@ h1.login-banner {
 #signup-submit-btn:hover {
     background-color: green; 
     color: white;
+    border: 1px solid black;
+}
+
+#signup-link {
+    font-size: 20px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+#signup-link:hover {
+    font-size: 30px;
+}
+
+.user-li {
+    font-size: 30px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.user-li:hover {
+    font-size: 45;
 }
 
 @import url('https://rsms.me/inter/inter-ui.css');
@@ -387,13 +406,15 @@ label {
   border: 0; 
 }
 .login-btn {
+  margin-top: 40px;
   border-radius: 12px;
   color: #707075;
-  margin-top: 40px;
-  transition: color 300ms;
+  -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
 }
-.login-btn:focus {
- border-radius: 15px;
+.login-btn:hover {
+  font-size: 25px;
+  border-radius: 20px;
   color: black;
 }
 .login-btn:active {
