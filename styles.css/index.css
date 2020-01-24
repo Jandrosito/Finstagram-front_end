@@ -1,15 +1,27 @@
+
+html {
+    min-height: 100%;
+    margin: 0;
+    background-color: black;
+ }
+
 body {
+    min-height: 100%;
+    margin: 0;
     background-color: black;
 }
 
 #main {
-    height: 100vh;
-    width: 100vw;
+    margin: 0px;
     background-color: black;
 }
 
 #img-div-body {
     background-color: black;
+}
+
+h3 {
+    color: white;
 }
 
 .page1 {
@@ -31,20 +43,30 @@ body {
     grid-template-columns: repeat(1, 1fr);
   }
 
-  .tile {
+  .tile-content {
     padding-top: 10px;
     padding-bottom: 10px;
-    padding-left: 20px;
+    padding-left: 20px; 
     display: block;
     margin-left: auto;
     margin-right: auto;
+    background-color: black;
+
+  }
+
+  .grid-image{
+    border-radius: 15px;
+    height: 500px;
+    width: 600px;
+    padding-bottom: 5px;
   }
 
   .display-pic {
-    border-radius: 50%;
+    border-radius: 300px;
+    box-sizing: border-box;
     padding-left: 20px;
-    max-height: 25%; 
-    max-width: 25%;
+    height: 300px;
+    width: 300px;
   }
 
   .about-me-p {
@@ -52,14 +74,16 @@ body {
     padding-left: 80px;
     font-family: 'Roboto', sans-serif;
     color: white;
-    margin-bottom: 0px;
+    margin-bottom: 30px;
 }
 
 #app-title {
     font-family: 'Lobster', cursive;
     color: white;
     text-align: center;
-    font-size: 60px;
+    font-size: 80px;
+    border-bottom: 1px solid white;
+    padding-bottom: 5px;
 }
 
 .user-display-name {
@@ -74,5 +98,351 @@ body {
 
 .user-div {
     text-align: center;
+}
+
+.likes {
+    color: white;
+}
+
+.comment-li {
+    color: white;
+}
+
+p {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    text-align: left;
+    font-size: 20px;
+} 
+
+h1.login-banner {
+    position: relative;
+    font-family: 'Lobster', cursive;
+    color: white;
+    font-size: 63px;
+    margin-top: 5%;
+    left: 41%;
+}
+
+#login-form-div {
+    background-color: black;
+    color: black;
+}
+
+#signup-link {
+    text-align: center;
+}
+
+#user-delete-btn {
+    position: relative;
+    left: 35px;
+    border-radius: 12px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+#profile-edit-btn{
+    position: relative;
+    left: 40px;
+    border-radius: 12px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+#user-delete-btn:hover {
+    background-color: red; 
+    color: white;
+    border: 1px solid black;
+    
+  }
+
+#profile-edit-btn:hover {
+    background-color: black; 
+    color: white;
+    border: 1px solid black;
+  }
+
+.like-btn{
+    border-radius: 12px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+.like-btn:hover{
+    background-color: green; 
+    color: white;
+    border: 1px solid black;
+}
+
+.comment-delete-btn{
+    position: relative;
+    top: -3px;
+    left: 5px;
+    font-size: 9px;
+    border: none;
+    color: white;
+    background-color: transparent;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+.comment-delete-btn:hover{
+    border-radius: 8px;
+    position: relative;
+    background-color:red; 
+    color: white;
+    border: 1px solid black;
+}
+
+.comment-li {
+    list-style: none;
+    font-size: 21px;
+}
+
+.like-counter {
+    position: relative;
+    color: white;
+    font-size: 16px;
+    left: 10px;
+}
+
+.likes {
+    font-size: 10px;
+}
+
+#like-div {
+    margin-bottom: 5px;
+}
+
+#comment-head {
+    position: relative;
+    text-decoration: underline;
+    top: 10px;
+    left: 38px;
+}
+
+#picture-submit-btn {
+    position: relative;
+    left: 10px;
+    border-radius: 12px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+#picture-submit-btn:hover {
+    background-color: green; 
+    color: white;
+    border: 1px solid black;
+}
+
+.photo-delete-btn {
+    border-radius: 12px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+.photo-delete-btn:hover {
+    position: relative;
+    background-color:red; 
+    color: white;
+    border: 1px solid black;
+}
+
+.comment-submit {
+    position: relative;
+    left: 10px;
+    border-radius: 12px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+.comment-submit:hover {
+    background-color: green; 
+    color: white;
+    border: 1px solid black;
+}
+
+#profile-edit-submit {
+    border-radius: 12px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+#profile-edit-submit:hover {
+    background-color: green; 
+    color: white;
+    border: 1px solid black;
+}
+
+#signup-submit-btn {
+    position: relative;
+    left: 10px;
+    border-radius: 12px;
+    -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+
+#signup-submit-btn:hover {
+    background-color: green; 
+    color: white;
+    border: 1px solid black;
+}
+
+#signup-link {
+    position: relative;
+    top: 20px;
     font-size: 30px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+#signup-link:hover {
+    font-size: 40px;
+}
+
+.user-li {
+    font-size: 30px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.user-li:hover {
+    font-size: 45;
+}
+
+@import url('https://rsms.me/inter/inter-ui.css');
+::selection {
+  background: #2D2F36;
+}
+::-webkit-selection {
+  background: #2D2F36;
+}
+::-moz-selection {
+  background: #2D2F36;
+}
+/* body {
+  background: white;
+  font-family: 'Inter UI', sans-serif;
+  margin: 0;
+  padding: 20px;
+} */
+.page {
+  background: black;
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 40px);
+  position: relative;
+  place-content: center;
+  width: calc(100% - 40px);
+}
+/* @media (max-width: 767px) {
+  .page {
+    height: auto;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+  }
+} */
+.container {
+  display: flex;
+  height: 320px;
+  margin: 0 auto;
+  width: 640px;
+}
+/* @media (max-width: 767px) {
+  .container {
+    flex-direction: column;
+    height: 630px;
+    width: 320px;
+  }
+} */
+.left {
+  background: white;
+  height: calc(100% - 40px);
+  top: 20px;
+  position: relative;
+  width: 50%;
+}
+/* @media (max-width: 767px) {
+  .left {
+    height: 100%;
+    left: 20px;
+    width: calc(100% - 40px);
+    max-height: 270px;
+  }
+} */
+.login {
+  font-size: 50px;
+  font-weight: 900;
+  margin: 50px 40px 40px;
+}
+.eula {
+  color: #999;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 40px;
+}
+.right {
+  background: #474A59;
+  box-shadow: 0px 0px 40px 16px rgba(0,0,0,0.22);
+  color: #F1F1F2;
+  position: relative;
+  width: 50%;
+}
+/* @media (max-width: 767px) {
+  .right {
+    flex-shrink: 0;
+      height: 100%;
+    width: 100%; 
+    max-height: 350px; 
+  } 
+} */
+svg {
+  position: absolute;
+  width: 320px;
+}
+path {
+  fill: none;
+  stroke: url(#linearGradient);;
+  stroke-width: 4;
+  stroke-dasharray: 240 1386;
+}
+.form {
+  margin: 40px;
+  position: absolute;
+}
+label {
+  color:white;
+  display: block;
+  font-size: 14px;
+  height: 16px;
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+.login-input {
+  background: transparent;
+  border: 0;
+  color: white;
+  font-size: 20px;
+  height: 30px;
+  line-height: 30px;
+  outline: none !important;
+  width: 100%;
+}
+.login-input::-moz-focus-inner { 
+  border: 0; 
+}
+.login-btn {
+  margin-top: 40px;
+  border-radius: 12px;
+  color: #707075;
+  -webkit-transition-duration: 0.4s; 
+    transition-duration: 0.4s;
+}
+.login-btn:hover {
+  font-size: 25px;
+  border-radius: 20px;
+  color: black;
+}
+.login-btn:active {
+  color: #d0d0d2;
 }
