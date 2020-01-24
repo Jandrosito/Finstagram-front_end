@@ -20,6 +20,10 @@ body {
     background-color: black;
 }
 
+h3 {
+    color: white;
+}
+
 .page1 {
     height: 20rem;
     width: 20rem;
@@ -50,11 +54,19 @@ body {
 
   }
 
+  .grid-image{
+    border-radius: 15px;
+    height: 500px;
+    width: 600px;
+    padding-bottom: 5px;
+  }
+
   .display-pic {
-    border-radius: 50%;
+    border-radius: 300px;
+    box-sizing: border-box;
     padding-left: 20px;
-    max-height: 25%; 
-    max-width: 25%;
+    height: 300px;
+    width: 300px;
   }
 
   .about-me-p {
@@ -62,7 +74,7 @@ body {
     padding-left: 80px;
     font-family: 'Roboto', sans-serif;
     color: white;
-    margin-bottom: 0px;
+    margin-bottom: 30px;
 }
 
 #app-title {
@@ -122,12 +134,16 @@ h1.login-banner {
 }
 
 #user-delete-btn {
+    position: relative;
+    left: 35px;
     border-radius: 12px;
     -webkit-transition-duration: 0.4s; 
     transition-duration: 0.4s;
 }
 
 #profile-edit-btn{
+    position: relative;
+    left: 40px;
     border-radius: 12px;
     -webkit-transition-duration: 0.4s; 
     transition-duration: 0.4s;
@@ -159,6 +175,9 @@ h1.login-banner {
 }
 
 .comment-delete-btn{
+    position: relative;
+    top: -3px;
+    left: 5px;
     font-size: 9px;
     border: none;
     color: white;
@@ -181,8 +200,10 @@ h1.login-banner {
 }
 
 .like-counter {
+    position: relative;
     color: white;
     font-size: 16px;
+    left: 10px;
 }
 
 .likes {
@@ -190,20 +211,19 @@ h1.login-banner {
 }
 
 #like-div {
-
+    margin-bottom: 5px;
 }
 
-.grid-image{
-    height: 500px;
-    width: 600px;
-}
-
-.display-pic {
-    height: 300px;
-    width: 300px;
+#comment-head {
+    position: relative;
+    text-decoration: underline;
+    top: 10px;
+    left: 38px;
 }
 
 #picture-submit-btn {
+    position: relative;
+    left: 10px;
     border-radius: 12px;
     -webkit-transition-duration: 0.4s; 
     transition-duration: 0.4s;
@@ -229,6 +249,8 @@ h1.login-banner {
 }
 
 .comment-submit {
+    position: relative;
+    left: 10px;
     border-radius: 12px;
     -webkit-transition-duration: 0.4s; 
     transition-duration: 0.4s;
@@ -253,6 +275,8 @@ h1.login-banner {
 }
 
 #signup-submit-btn {
+    position: relative;
+    left: 10px;
     border-radius: 12px;
     -webkit-transition-duration: 0.4s; 
     transition-duration: 0.4s;
@@ -265,13 +289,15 @@ h1.login-banner {
 }
 
 #signup-link {
-    font-size: 20px;
+    position: relative;
+    top: 20px;
+    font-size: 30px;
     cursor: pointer;
     transition-duration: 0.4s;
 }
 
 #signup-link:hover {
-    font-size: 30px;
+    font-size: 40px;
 }
 
 .user-li {

@@ -230,12 +230,13 @@ document.addEventListener("DOMContentLoaded", function() {
         nameHead.innerText = userInfo.username
         displayPicImg.src = userInfo.display_pic
         displayPicDiv.appendChild(displayPicImg)
+        displayPicImg.class = "display-pic-img"
         aboutMeP.innerText = userInfo.about_me
         aboutMeDiv.id = "about-me-div"
         aboutMeP.className = "about-me-p"
         aboutMeDiv.appendChild(aboutMeP)
         
-         if (userInfo.comments.length < 1) {
+         if (userInfo.photos.length < 1) {
             let noPhotoText = document.createElement("h3")
             if (currentUser.id === userInfo.id) {
                 noPhotoText.innerText = "You have not posted any photos yet"
@@ -256,13 +257,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 let commentSubmitBtn = document.createElement("input")
                 let photoDeleteBtn = document.createElement("button")
                 let likeDiv = document.createElement("div")
+                let commentHead = document.createElement("h3")
                 
                 if (photo.caption) {
-                    let caption = document.createElement("p") 
+                    let caption = document.createElement("h3") 
                     caption.innerText = photo.caption 
                     tileContent.appendChild(caption)
                 }
 
+                commentHead.innerText = "Comments"
+                commentHead.id = "comment-head"
                 gridImage.className = "grid-image"
                 photoDeleteBtn.innerText = "Delete Photo"
                 photoDeleteBtn.dataset.photoid = photo.id
@@ -334,6 +338,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 likeDiv.appendChild(likeCounter)
                 tileContent.appendChild(likeDiv)
                 tileContent.appendChild(photoDeleteBtn)
+                tileContent.appendChild(commentHead)
                 tileContent.appendChild(commentUl)
                 tileContent.appendChild(commentForm)
                 imgBody.appendChild(tileContent)
@@ -472,7 +477,7 @@ document.addEventListener("DOMContentLoaded", function() {
              })
              .then(resp => resp.json())
              .then(photo => {
-                 renderUser(photo.user_id)
+                 renderUser(currentUser.id)
              })
          }         
     })
@@ -506,8 +511,6 @@ document.addEventListener("DOMContentLoaded", function() {
             let passwordData = document.getElementById("password-edit-field")
             let photoData = document.getElementById("photo-edit-field")
             let aboutMeData = document.getElementById("about-me-edit-field")
-            console.log(usernameData.value)
-            console.log(e.target.dataset.userid)
             fetch(`http://localhost:3000/users/${e.target.dataset.userid}`, {
                 method: "PATCH",
                 headers: {
@@ -523,8 +526,6 @@ document.addEventListener("DOMContentLoaded", function() {
             })
             .then(resp => resp.json())
             .then(editedUser => {
-                console.log(editedUser)
-                console.log(editedUser.id)
                 renderUser(editedUser.id)
             })
         }
